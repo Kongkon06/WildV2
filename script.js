@@ -19,7 +19,7 @@
   
   // Countdown Timer
   function initTimer() {
-    const eventDate = new Date('March 21, 2025 00:00:00').getTime();
+    const eventDate = new Date('January 31, 2025 00:00:00').getTime();
   
     function updateTimer() {
       const now = new Date().getTime();
@@ -34,6 +34,14 @@
       document.getElementById('hours').innerHTML = `${hours}<br>Hours`;
       document.getElementById('minutes').innerHTML = `${minutes}<br>Minutes`;
       document.getElementById('seconds').innerHTML = `${seconds}<br>Seconds`;
+  
+      // Optional: Handle countdown expiration
+      if (distance < 0) {
+        document.getElementById('days').innerHTML = `0<br>Days`;
+        document.getElementById('hours').innerHTML = `0<br>Hours`;
+        document.getElementById('minutes').innerHTML = `0<br>Minutes`;
+        document.getElementById('seconds').innerHTML = `0<br>Seconds`;
+      }
     }
   
     // Update timer every second
@@ -43,9 +51,10 @@
   
   // Initialize everything when the page loads
   document.addEventListener('DOMContentLoaded', () => {
-    initSlider();
+    initSlider(); // Make sure you have a function named initSlider
     initTimer();
   });
+  
 // Initialize the map
 function initMap() {
   var location = { lat: 27.4729, lng: 94.9243 }; // Coordinates for Dibrugarh University
