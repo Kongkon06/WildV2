@@ -15,9 +15,13 @@
           <h1 class="wild-horse">Wild Horse All Assam</h1>
           <h1 class="championship">Championship 2025</h1>
         </div>
-        
+        <div class="hamburger-menu" id="hamburgerMenu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="#333">
+            <path d="M3 6h18M3 12h18M3 18h18" stroke="#333" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
       </div>
-      <div class="nav-right">
+      <div class="nav-right" id="navLinks">
         <ul>
           <li><a href="home.html">Home</a></li>
           <li><a href="about.html">About</a></li>
@@ -27,6 +31,7 @@
       </div>
     </div>
   </header>
+  
 
   <main>
     <div class="slider">
@@ -246,6 +251,49 @@
 
 </body>
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburgerMenu = document.getElementById('hamburgerMenu');
+  const navLinks = document.getElementById('navLinks');
+  const body = document.body;
 
+  // Toggle menu
+  hamburgerMenu.addEventListener('click', () => {
+    hamburgerMenu.classList.toggle('active');
+    navLinks.classList.toggle('active');
+    body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && !hamburgerMenu.contains(e.target)) {
+      hamburgerMenu.classList.remove('active');
+      navLinks.classList.remove('active');
+      body.style.overflow = '';
+    }
+  });
+
+  // Close menu when clicking a link
+  const navLinksElements = navLinks.querySelectorAll('a');
+  navLinksElements.forEach(link => {
+    link.addEventListener('click', () => {
+      hamburgerMenu.classList.remove('active');
+      navLinks.classList.remove('active');
+      body.style.overflow = '';
+    });
+  });
+
+  // Handle resize
+  let timeoutId;
+  window.addEventListener('resize', () => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      if (window.innerWidth > 768) {
+        hamburgerMenu.classList.remove('active');
+        navLinks.classList.remove('active');
+        body.style.overflow = '';
+      }
+    }, 250);
+  });
+});
 </script>
 </html>

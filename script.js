@@ -68,4 +68,13 @@ function initMap() {
     position: location,
     map: map,
   });
+  document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerMenu = document.getElementById('hamburgerMenu');
+    const navLinks = document.getElementById('navLinks');
+  
+    hamburgerMenu.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  });
+  
 }
