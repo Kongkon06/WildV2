@@ -215,6 +215,7 @@ body {
 .footer-logo {
   width: 80px;
   height: auto;
+  object-fit: contain;
 }
 
 /* Timer Container */
@@ -279,6 +280,12 @@ body {
   .timer-label {
     font-size: 0.875rem;
   }
+
+  .footer-logo {
+    width: 50px;
+    height: auto;
+    object-fit: contain;
+  }
 }
 
 @media (max-width: 480px) {
@@ -288,6 +295,11 @@ body {
   
   .timer-title {
     font-size: 2rem;
+  }
+  .footer-logo {
+    width: 50px;
+    height: auto;
+    object-fit: contain;
   }
 }
 
@@ -312,6 +324,11 @@ body {
   .footer-logos {
     flex-wrap: wrap;
   }
+  .footer-logo {
+    width: 30px;
+    height: auto;
+    object-fit: contain;
+  }
 }
 
 @media (max-width: 480px) {
@@ -326,8 +343,10 @@ body {
   .event-item, .category-card {
     padding: 1.5rem;
   }
-
-  .map-container {
-    height: 300px;
+  .footer-logo {
+    width: 30px;
+    height: auto;
+    object-fit: contain;
   }
+
 }
