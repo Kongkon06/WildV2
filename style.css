@@ -40,6 +40,7 @@ body {
 
 .nav-left {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 1.5rem;
 }
@@ -129,15 +130,14 @@ body {
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  cursor: pointer;
-  height: 30px; /* Slightly increase the height */
-  width: 36px; /* Slightly increase the width */
-  padding: 0;
+  height: 24px;
+  width: 30px;
   background: none;
   border: none;
-  position: absolute;
-  top: 15px; /* Adjust spacing for better alignment */
-  right: 15px; /* Adjust spacing for better alignment */
+  cursor: pointer;
+  position: relative; /* Changed from absolute to relative */
+  margin-left: auto; /* This will push it to the right */
+  padding: 0;
 }
 
 .hamburger-menu .bar {
@@ -179,6 +179,7 @@ body {
 
   .nav-right.active {
     right: 0;
+    background-color: #000;
   }
 
   .nav-right ul {
@@ -211,6 +212,7 @@ body {
   }
 
   .logo {
+    height: 50px;
     width: 50px;
   }
 
