@@ -10,19 +10,33 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 }
-/* Header & Navigation */
 .navbar {
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background: rgb(233, 61, 61); /* Light Blue Gradient */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Slightly more defined shadow for better visibility */
   position: sticky;
   top: 0;
   z-index: 1000;
 }
+
+
+/* Keyframes to animate the gradient for a dynamic texture */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 
 .nav-left {
   display: flex;
@@ -31,18 +45,24 @@ body {
 }
 
 .logo {
-  width: 60px;
-  height: auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
 }
 
 .title h1 {
   font-size: 1.5rem;
-  color: #333;
+  color: black;
   margin: 0;
+  font-family: cursive;
+  font-size: 30px;
+  font-weight: bolder;
 }
 
 .title .championship {
-  color: #ff6600;
+  color: white;
+  font-family: cursive;
+  font-weight: bolder;
 }
 
 .nav-right {
@@ -60,25 +80,44 @@ body {
 .nav-right a {
   text-decoration: none;
   color: #333;
-  font-weight: 500;
-  transition: color 0.3s;
-  padding: 0.5rem 0;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  padding: 0.5rem 1rem; /* Added horizontal padding for better box sizing */
   position: relative;
 }
 
-.nav-right a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #ff6600;
-  transition: width 0.3s ease;
+.nav-right a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: whitesmoke; /* Text color */
+  font-size: 1.1rem;
 }
 
+.nav-right a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 102, 0, 0.1); /* Light orange box effect */
+  border: 2px solid white; /* Border to create the box effect */
+  border-radius: 8px; /* Rounded corners for a professional look */
+  z-index: -1; /* Ensures the box stays behind the text */
+  transform: scale(0); /* Initial state: scaled down */
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.nav-right a:hover::before {
+  transform: scale(1); /* Expands the box */
+  background: rgba(255, 255, 255, 0.4); /* Changes the background to a white shade */
+}
+
+
 .nav-right a:hover {
-  color: #ff6600;
+  color: black;
 }
 
 .nav-right a:hover::after {
@@ -91,20 +130,25 @@ body {
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  height: 22px;
-  width: 30px;
+  height: 30px; /* Slightly increase the height */
+  width: 36px; /* Slightly increase the width */
   padding: 0;
   background: none;
   border: none;
+  position: absolute;
+  top: 15px; /* Adjust spacing for better alignment */
+  right: 15px; /* Adjust spacing for better alignment */
 }
 
 .hamburger-menu .bar {
   background: #333;
-  height: 3px;
+  height: 4px; /* Increase thickness for a bolder look */
   width: 100%;
-  border-radius: 3px;
+  border-radius: 5px; /* Add more rounding for a smoother, modern look */
   transition: all 0.3s ease-in-out;
 }
+
+
 
 /* Hamburger Animation */
 .hamburger-menu.active .bar:nth-child(1) {
@@ -174,29 +218,33 @@ body {
     font-size: 1rem;
   }
 }
-/* Slider */
+/* Slider Container */
 .slider {
   position: relative;
-  height: 60vh;
+  height: 60vh; /* Adjust height as needed */
+  width: 100%;
   overflow: hidden;
 }
 
+/* Individual Slides */
 .slide {
   position: absolute;
   width: 100%;
   height: 100%;
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 1s ease-in-out; /* Smooth fade transition */
 }
 
+/* Active Slide */
 .slide.active {
   opacity: 1;
 }
 
+/* Image Styling */
 .slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Ensures the image covers the entire area */
 }
 
 /* Events Section */
@@ -226,6 +274,11 @@ body {
   border-radius: 10px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
   transition: transform 0.3s;
+  display: flex;                /* Use flexbox to center content */
+  flex-direction: column;       /* Stack the elements vertically */
+  justify-content: center;      /* Vertically center the content */
+  align-items: center;          /* Horizontally center the content */
+  text-align: center;           /* Make sure the text is centered */
 }
 
 .event-item:hover {
@@ -252,7 +305,37 @@ body {
   background: #e65c00;
 }
 
-/* Categories Section */
+
+.brochure-download {
+  text-align: center; /* Center the button horizontally */
+  margin-top: 70px; /* Add space above the button */
+}
+
+.download-brochure-btn {
+  display: inline-block;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background: #007bff;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.download-brochure-btn:hover {
+  background: #0056b3;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+
+
+/* General styling for all age categories */
 .age-categories {
   padding: 4rem 2rem;
 }
@@ -260,30 +343,105 @@ body {
 .age-categories h2 {
   text-align: center;
   margin-bottom: 2rem;
-  color: #333;
+  color: #000; /* Black color for the main heading */
   font-size: 2.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .categories-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ensure all boxes are same width */
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  justify-content: center;
 }
 
+/* Shared styling for all boxes */
 .category-card {
-  background: #fff;
+  background: #f9f9f9; /* Light background color */
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   text-align: center;
-  transition: transform 0.3s;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #f0e68c;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 0 15px rgba(240, 230, 140, 0.5);
 }
 
 .category-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3), 0 0 25px rgba(240, 230, 140, 0.7);
 }
+
+.category-card h3 {
+  font-size: 1.6rem;
+  color: #000; /* Black color for the box headings */
+  margin-bottom: 1rem;
+}
+
+.category-card p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 0.5rem; /* Add some spacing between paragraphs */
+  display: block; /* Ensure each paragraph is displayed as a block */
+}
+
+/* Box-specific styles */
+.box1 {
+  background-color: #e8f0fe; /* Light blue background for Box 1 */
+}
+
+.box2 {
+  background-color: #ffe4e1; /* Light pink background for Box 2 */
+}
+
+.box3 {
+  background-color: #e6ffe6; /* Light green background for Box 3 */
+}
+
+.box4 {
+  background-color: #fffacd; /* Light yellow background for Box 4 */
+}
+
+.box5 {
+  background-color: #dcdcdc; /* Light gray background for Box 5 */
+}
+
+.box6 {
+  background-color: #f5f5dc; /* Beige background for Box 6 */
+}
+
+/* Team Kata list spacing */
+.kata-box {
+  margin-top: 20px; /* Space between the heading and the list of categories */
+}
+.kata-box p {
+  margin: 10 0px 0; /* Add vertical space between the items */
+  
+}
+
+
+
+
+/* Ensure all boxes have same width */
+.category-card {
+  width: 100%;
+}
+
+/* Centering the last two boxes */
+.categories-container .category-card:last-child {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center content inside last two boxes */
+}
+
+
+
 
 
 /* Contact Section */
@@ -297,17 +455,27 @@ body {
   margin-bottom: 2rem;
 }
 
+.contact-us-box {
+  padding: 2rem;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Light shadow */
+  margin-top: 3rem; /* Margin from top */
+  margin-bottom: 3rem; /* Margin from bottom */
+  border-radius: 8px; /* Rounded corners */
+}
+
 .map-container {
-  
   border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light box shadow */
 }
 
 .map iframe {
   width: 100%;
-  height: 100%;
+  height: 400px; /* Increased map height */
   border: none;
 }
+
 
 /* Footer */
 .footer {
@@ -466,4 +634,50 @@ body {
     object-fit: contain;
   }
 
+}
+/* Styling for the warning box */
+.warning-box {
+  max-width: 800px;
+  height: 200px;
+  margin: 20px auto;
+  margin-bottom: 60px;
+  padding: 20px;
+  border: 2px solid #ff9800;
+  background-color: #fffbe6;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Marquee text */
+.marquee-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #d9534f;
+  margin-bottom: 15px;
+}
+
+/* Warning text */
+.warning-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  line-height: 1.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .warning-box {
+    max-width: 90%;
+    height: auto;
+    padding: 15px;
+  }
+  .marquee-text,
+  .warning-text {
+    font-size: 16px;
+  }
 }

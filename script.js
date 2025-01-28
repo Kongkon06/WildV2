@@ -1,60 +1,96 @@
-  // Slider functionality
-  function initSlider() {
-    const slides = document.querySelectorAll('.slide');
-    let currentSlide = 0;
+// Slider Functionality
+class Slider {
+  constructor(sliderElement, interval = 3000) {
+    this.slider = sliderElement;
+    this.slides = this.slider.querySelectorAll('.slide');
+    this.currentIndex = 0;
+    this.interval = interval;
+    this.autoSlide();
+  }
+
+  // Switch to the next slide
+  nextSlide() {
+    this.changeSlide((this.currentIndex + 1) % this.slides.length);
+  }
+
+  // Switch to the previous slide
+  prevSlide() {
+    this.changeSlide((this.currentIndex - 1 + this.slides.length) % this.slides.length);
+  }
+
+  // Change slide by index
+  changeSlide(index) {
+    this.slides[this.currentIndex].classList.remove('active');
+    this.currentIndex = index;
+    this.slides[this.currentIndex].classList.add('active');
+  }
+
+  // Automatically cycle through slides
+  autoSlide() {
+    setInterval(() => {
+      this.nextSlide();
+    }, this.interval);
+  }
+
+  // Manual control of slides (next/prev)
+  addControls(nextBtn, prevBtn) {
+    nextBtn.addEventListener('click', () => this.nextSlide());
+    prevBtn.addEventListener('click', () => this.prevSlide());
+  }
+}
+
+// Initialize slider on the page
+document.addEventListener('DOMContentLoaded', () => {
+  const sliderElement = document.querySelector('.slider');
+  const nextButton = document.querySelector('.next-btn');
+  const prevButton = document.querySelector('.prev-btn');
   
-    // Show first slide
-    slides[0].classList.add('active');
+  const slider = new Slider(sliderElement);
+
+  // Optional: Add manual controls if buttons are present
+  if (nextButton && prevButton) {
+    slider.addControls(nextButton, prevButton);
+  }
+});
+
+// Countdown Timer
+function initTimer() {
+  const eventDate = new Date();
+  eventDate.setDate(eventDate.getDate() + 52); // Add 52 days
+  eventDate.setHours(8); // Set to 8 hours
+  eventDate.setMinutes(37); // Set to 37 minutes
+  eventDate.setSeconds(11); // Set to 11 seconds
   
-    // Function to change slide
-    function nextSlide() {
-      slides[currentSlide].classList.remove('active');
-      currentSlide = (currentSlide + 1) % slides.length;
-      slides[currentSlide].classList.add('active');
+  function updateTimer() {
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+  
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+    document.getElementById('days').innerHTML = `${days}<br>Days`;
+    document.getElementById('hours').innerHTML = `${hours}<br>Hours`;
+    document.getElementById('minutes').innerHTML = `${minutes}<br>Minutes`;
+    document.getElementById('seconds').innerHTML = `${seconds}<br>Seconds`;
+  
+    // Optional: Handle countdown expiration
+    if (distance < 0) {
+      document.getElementById('days').innerHTML = `0<br>Days`;
+      document.getElementById('hours').innerHTML = `0<br>Hours`;
+      document.getElementById('minutes').innerHTML = `0<br>Minutes`;
+      document.getElementById('seconds').innerHTML = `0<br>Seconds`;
     }
-  
-    // Change slide every 5 seconds
-    setInterval(nextSlide, 5000);
   }
   
-  // Countdown Timer
-  function initTimer() {
-    const eventDate = new Date('January 31, 2025 00:00:00').getTime();
-  
-    function updateTimer() {
-      const now = new Date().getTime();
-      const distance = eventDate - now;
-  
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  
-      document.getElementById('days').innerHTML = `${days}<br>Days`;
-      document.getElementById('hours').innerHTML = `${hours}<br>Hours`;
-      document.getElementById('minutes').innerHTML = `${minutes}<br>Minutes`;
-      document.getElementById('seconds').innerHTML = `${seconds}<br>Seconds`;
-  
-      // Optional: Handle countdown expiration
-      if (distance < 0) {
-        document.getElementById('days').innerHTML = `0<br>Days`;
-        document.getElementById('hours').innerHTML = `0<br>Hours`;
-        document.getElementById('minutes').innerHTML = `0<br>Minutes`;
-        document.getElementById('seconds').innerHTML = `0<br>Seconds`;
-      }
-    }
-  
-    // Update timer every second
-    updateTimer();
-    setInterval(updateTimer, 1000);
-  }
-  
-  // Initialize everything when the page loads
-  document.addEventListener('DOMContentLoaded', () => {
-    initSlider(); // Make sure you have a function named initSlider
-    initTimer();
-  });
-  
+  // Update the timer every second
+  setInterval(updateTimer, 1000);
+}
+
+// Initialize the timer
+initTimer();
+
 // Initialize the map
 function initMap() {
   var location = { lat: 27.4729, lng: 94.9243 }; // Coordinates for Dibrugarh University
